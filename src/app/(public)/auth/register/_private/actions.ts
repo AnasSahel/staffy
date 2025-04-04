@@ -1,6 +1,7 @@
 "use server";
 
 import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { registerFormSchema, RegisterFormStateType } from "./schemas";
 
@@ -25,6 +26,7 @@ export async function registerUserAction(
       email,
       password,
     },
+    headers: await headers(),
   });
 
   if (!user) {

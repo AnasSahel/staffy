@@ -20,4 +20,13 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
+  advanced: {
+    ipAddress: {
+      ipAddressHeaders: [
+        "x-forwarded-for",
+        "x-vercel-forwarded-for",
+        "x-real-ip",
+      ],
+    },
+  },
 });
