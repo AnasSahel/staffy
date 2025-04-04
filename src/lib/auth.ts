@@ -27,6 +27,7 @@ export const auth = betterAuth({
         "x-vercel-forwarded-for",
         "x-real-ip",
       ],
+      disableIpTracking: false,
     },
   },
 });
