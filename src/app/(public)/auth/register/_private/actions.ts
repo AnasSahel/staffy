@@ -3,13 +3,13 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { registerFormSchema, RegisterFormStateType } from "./schemas";
+import { RegisterFormSchema, RegisterFormStateType } from "./schemas";
 
 export async function registerUserAction(
   previousState: RegisterFormStateType,
   formData: FormData,
 ): Promise<RegisterFormStateType> {
-  const parsedFormData = registerFormSchema.safeParse({
+  const parsedFormData = RegisterFormSchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
     password: formData.get("password"),

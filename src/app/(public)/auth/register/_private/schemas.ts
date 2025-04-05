@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const registerFormSchema = z.object({
+export const RegisterFormSchema = z.object({
   name: z.string().min(2, {
     message: "Name must be at least 2 characters long",
   }),
@@ -12,8 +12,8 @@ export const registerFormSchema = z.object({
   }),
 });
 
-export type RegisterFormType = z.infer<typeof registerFormSchema>;
+export type RegisterFormType = z.infer<typeof RegisterFormSchema>;
 export type RegisterFormFlattenErrorType = z.inferFlattenedErrors<
-  typeof registerFormSchema
+  typeof RegisterFormSchema
 >;
 export type RegisterFormStateType = Partial<RegisterFormFlattenErrorType>;

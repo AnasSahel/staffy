@@ -14,8 +14,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useActionState, useRef } from "react";
 import { useForm } from "react-hook-form";
-import { registerUserAction } from "./actions";
-import { RegisterFormSchema, RegisterFormType } from "./schemas";
+import { loginUserAction } from "./actions";
+import { LoginFormSchema, LoginFormType } from "./schemas";
 
 const DEFAULT_STATE = {
   fieldErrors: {},
@@ -23,44 +23,29 @@ const DEFAULT_STATE = {
 };
 
 const DEFAULT_VALUES = {
-  name: "",
   email: "",
   password: "",
 };
 
-export default function RegisterForm() {
+export default function LoginForm() {
   const formRef = useRef<HTMLFormElement>(null);
-  const [state, formAction] = useActionState(registerUserAction, DEFAULT_STATE);
+  const [state, formAction] = useActionState(loginUserAction, DEFAULT_STATE);
 
-  const form = useForm<RegisterFormType>({
-    resolver: zodResolver(RegisterFormSchema),
+  const form = useForm<LoginFormType>({
+    resolver: zodResolver(LoginFormSchema),
     defaultValues: DEFAULT_VALUES,
   });
 
   return (
     <Form {...form}>
-      {state.formErrors}
       <form
         ref={formRef}
         action={formAction}
         onSubmit={form.handleSubmit(() => {
           formRef.current?.submit();
         })}
-        className="flex flex-col gap-4">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter your name" {...field} autoFocus />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
+        className="flex flex-col gap-4"
+      >
         <FormField
           control={form.control}
           name="email"
@@ -99,15 +84,16 @@ export default function RegisterForm() {
         />
 
         <Button type="submit" className="w-full">
-          Register
+          Connect
         </Button>
       </form>
       <div className="mt-4 flex items-center justify-center space-x-1 text-sm">
-        <span className="text-muted-foreground">Already have an account?</span>
+        <span className="text-muted-foreground">Don't have an account?</span>
         <Link
-          href="/auth/login"
-          className="text-primary hover:text-primary/80 font-medium transition-colors">
-          Login here
+          href="/auth/register"
+          className="text-primary hover:text-primary/80 font-medium transition-colors"
+        >
+          Create one here
         </Link>
       </div>
     </Form>
